@@ -1,0 +1,99 @@
+@use 'bootstrap/scss/bootstrap';
+
+:root {
+  background: #f4f7f6;
+  color: #17221f;
+}
+body {
+  min-width: 320px;
+  background: linear-gradient(135deg, #f4f7f6 0%, #e7f1ed 100%);
+}
+.eyebrow {
+  color: #13795b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(23, 34, 31, 0.08);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1rem 2.5rem rgba(30, 60, 48, 0.08);
+}
+.btn-primary {
+  --bs-btn-bg: #13795b;
+  --bs-btn-border-color: #13795b;
+  --bs-btn-hover-bg: #0e6249;
+  --bs-btn-hover-border-color: #0e6249;
+}
+.empty-state {
+  padding: 1.5rem;
+  border: 1px dashed #b8ccc4;
+  border-radius: 0.5rem;
+  color: #65756f;
+  text-align: center;
+}
+.list-item {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e3ebe7;
+}
+.pagination-wrap {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(23, 34, 31, 0.48);
+}
+.modal-dialog-custom {
+  width: min(100%, 30rem);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 1.5rem 4rem rgba(23, 34, 31, 0.25);
+}
+.modal-icon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+}
+.modal-icon-error {
+  color: #842029;
+  background: #f8d7da;
+}
+.modal-icon-success {
+  color: #0f5132;
+  background: #d1e7dd;
+}
+.modal-icon-info {
+  color: #055160;
+  background: #cff4fc;
+}
+.toast-stack {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1040;
+  display: grid;
+  gap: 0.75rem;
+  width: min(24rem, calc(100% - 2rem));
+}
+.toast-custom {
+  padding: 1rem 1.25rem;
+  border-left: 0.25rem solid #13795b;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgba(23, 34, 31, 0.16);
+}
