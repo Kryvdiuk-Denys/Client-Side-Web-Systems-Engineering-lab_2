@@ -1,21 +1,71 @@
+interface ValidationResult {
+  isValid: boolean;
+  errors: string[];
+}
+
+interface BookFormData {
+  title: string;
+  author: string;
+  year: string;
+}
+
+interface UserFormData {
+  id: string;
+  name: string;
+  email: string;
+}
+
+function resultFrom(errors: string[]): ValidationResult {
+  return { isValid: errors.length === 0, errors };
+}
+
+function isDigits(value: string): boolean {
+  return value.length > 0 && [...value].every((character) => 
+  character >= '0' && character <= '9');
+}
+
+function isNumericId(value: string): boolean {
+  return isDigits(value.trim());
+}
+
+function isValidYear(value: string): boolean {
+  const year = Number(value);
+  return value.length === 4 && isDigits(value) && year >= 1000 && year <= 2100;
+}
+
+function isValidEmail(value: string): boolean {
+  const email = value.trim();
+  const atIndex = email.indexOf('@');
+  const domain = email.slice(atIndex + 1);
+
+  return (
+    atIndex > 0 && !email.includes(' ') && domain.includes('.') && !domain.startsWith('.') && !domain.endsWith('.')
+  );
+}
+
 export const Validation = {
-  validateBookForm(data: { title: string; author: string; year: string }): { isValid: boolean; errors: string[] } {
+  validateBookForm(data: BookFormData): ValidationResult {
     const errors: string[] = [];
+
     if (!data.title.trim()) errors.push('Вкажіть назву книги.');
     if (!data.author.trim()) errors.push('Вкажіть автора.');
-    const year = Number(data.year);
-    if (!/^\d{4}$/.test(data.year) || year < 1000 || year > 2100) errors.push('Вкажіть коректний рік.');
-    return { isValid: errors.length === 0, errors };
+    if (!isValidYear(data.year)) errors.push('Вкажіть коректний рік.');
+
+    return resultFrom(errors);
   },
-  validateUserForm(data: { id: string; name: string; email: string }): { isValid: boolean; errors: string[] } {
+
+  validateUserForm(data: UserFormData): ValidationResult {
     const errors: string[] = [];
-    if (!/^\d+$/.test(data.id.trim())) errors.push('ID користувача має містити тільки цифри.');
+
+    if (!isNumericId(data.id)) errors.push('ID користувача має містити тільки цифри.');
     if (!data.name.trim()) errors.push("Вкажіть ім'я користувача.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.push('Вкажіть коректний email.');
-    return { isValid: errors.length === 0, errors };
+    if (!isValidEmail(data.email)) errors.push('Вкажіть коректний email.');
+
+    return resultFrom(errors);
   },
-  validateUserId(id: string): { isValid: boolean; errors: string[] } {
-    const errors = /^\d+$/.test(id.trim()) ? [] : ['ID користувача має містити тільки цифри.'];
-    return { isValid: errors.length === 0, errors };
+
+  validateUserId(id: string): ValidationResult {
+    const errors = isNumericId(id) ? [] : ['ID користувача має містити тільки цифри.'];
+    return resultFrom(errors);
   },
 };
