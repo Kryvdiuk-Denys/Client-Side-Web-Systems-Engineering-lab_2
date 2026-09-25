@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/Client-Side-Web-Systems-Engineering/',
+  base: '/Client-Side-Web-Systems-Engineering-lab_2/',
   server: {
     host: 'localhost',
     port: 9000,
