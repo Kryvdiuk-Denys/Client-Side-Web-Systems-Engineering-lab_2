@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/Client-Side-Web-Systems-Engineering/',
   server: {
     host: 'localhost',
     port: 9000,
@@ -14,7 +15,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../dist-vite',
+    outDir: 'dist-vite',
     emptyOutDir: true,
   },
 });
